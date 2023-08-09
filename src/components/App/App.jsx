@@ -1,4 +1,5 @@
 import DisplayMessage from '../DisplayMessage/DisplayMessage';
+import NewMessageModal from '../NewMessageModal/NewMessageModal';
 import TemplateForm from '../TemplateForm/TemplateForm';
 import './App.css';
 import React, { useState, useEffect } from 'react';
@@ -24,6 +25,7 @@ function App() {
       />
       <DisplayMessage
       />
+      <NewMessageModal/>
     </div>
   );
 }

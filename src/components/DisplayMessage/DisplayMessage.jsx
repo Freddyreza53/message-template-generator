@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import  { MessageFinder } from '../../helpers'
+import { current } from '@reduxjs/toolkit';
 
 function DisplayMessage() {
     const company = useSelector(store => store.selectedCompanyReducer);
@@ -11,17 +12,25 @@ function DisplayMessage() {
     console.log('guest: ', guest);
     console.log('message: ', messageTemplate);
 
-    let finalMessage = ''
+    const { DateTime } = require('luxon');
 
+const convertUnixTimestamp = (unixTimestamp) => {
+    const dateTime = DateTime.fromSeconds(unixTimestamp);
+    const formattedDate = dateTime.toFormat('DDDD, h:mm a');
+    
+    return formattedDate;
+}
 
-    finalMessage = messageTemplate.message
-        ?.replace("{GREETING}", "morning")
-        ?.replace("{HOTEL}", company.company)
+const checkTimeOfDayForGreeting = (timeNow) => {
+    console.log(timeNow.c.hour);
+    if (timeNow.c.hour >= 6 && timeNow.c.hour <= 12) {
+        return 'morning'
+    } else if (timeNow.c.hour > 12 && timeNow.c.hour <= 18) {
+        return 'afternoon'
+    } 
+    return 'evening'
+}
 
-    finalMessage = finalMessage
-        ?.replace("{FIRSTNAME}", guest.firstName)
-        ?.replace("{NUMBER}", guest.reservation?.roomNumber)
-        
     return (
         <>
             <h2>Message: </h2>
@@ -30,11 +39,31 @@ function DisplayMessage() {
                     {messageTemplate}
                 </div>
                 :
-                <div className='message-container'>
-                    {messageTemplate.message
-                        ?.replace("{GREETING}", "morning")
-                        ?.replace("{HOTEL}", company.company)}
-                </div>
+                company == '' ?
+                    <div className='message-container'>
+                        {messageTemplate.message
+                            ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
+                        }
+                    </div>
+                    :
+                    guest == '' ?
+                        <div className='message-container'>
+                            {messageTemplate.message
+                                ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
+                                ?.replace("{HOTEL}", company.company)
+                            }
+                        </div>
+                        :
+                        <div className='message-container'>
+                        {messageTemplate.message
+                            ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
+                            ?.replace("{HOTEL}", company.company)
+                            ?.replace("{FIRSTNAME}", guest.firstName)
+                            ?.replace("{NUMBER}", guest.reservation?.roomNumber)
+                            ?.replace("{CHECKIN}", convertUnixTimestamp(guest.reservation?.startTimestamp))
+                            ?.replace("{CHECKOUT}", convertUnixTimestamp(guest.reservation?.endTimestamp))
+                        }
+                    </div>
             }
         </>
     );
