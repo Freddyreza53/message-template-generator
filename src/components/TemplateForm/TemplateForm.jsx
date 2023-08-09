@@ -8,34 +8,47 @@ function TemplateForm() {
   const companies = useSelector(store => store.companyListReducer);
   const guests = useSelector(store => store.guestListReducer);
   const messageTemplates = useSelector(store => store.messageTemplateReducer);
+
   const company = useSelector(store => store.selectedCompanyReducer);
-  const guest = useSelector(store => store.selectedGuestReducer);
   const messageTemplate = useSelector(store => store.selectedMessageReducer);
 
-  const handleTemplateChange = (e) => {
-    console.log(e.target.value);
-    dispatch({ type: 'ADD_MESSAGE', payload: messageTemplates });
+  const handleTemplateChange = (messageId) => {
+    console.log(messageId);
+    messageTemplates.forEach(messageTemplate => {
+      if (messageId == messageTemplate.id) {
+        dispatch({ type: 'ADD_MESSAGE', payload: messageTemplate });
+      }
+    });
   }
 
   const handleCompanyChange = (companyId) => {
     console.log(companyId);
-    dispatch({ type: 'ADD_COMPANY', payload: companyId });
+    companies.forEach(company => {
+      if (companyId == company.id) {
+        dispatch({ type: 'ADD_COMPANY', payload: company });
+      }
+    });
   }
 
-  const handleGuestChange = (e) => {
-    console.log(e.target.value);
-    dispatch({ type: 'ADD_GUEST', payload: guests });
+  const handleGuestChange = (guestId) => {
+    console.log(guestId);
+    guests.forEach(guest => {
+      if (guestId == guest.id) {
+        dispatch({ type: 'ADD_GUEST', payload: guest });
+      }
+    });
   }
 
 
   return (
     <>
       <h2>Choose a message template: </h2>
-      <select onChange={(e) => handleTemplateChange(e)}>
+      <select onChange={(e) => handleTemplateChange(e.target.value)}>
         <option defaultValue="Select a message" disabled selected>Select message</option>
-        {messageTemplates?.map(message => {
+        {messageTemplates?.map(messageObject => {
+          const { message, id } = messageObject;
           return (
-            <option value={message.message} key={message.id}>{message.message}</option>
+            <option value={id} key={id}>{message}</option>
           )
         })}
       </select>
@@ -60,11 +73,12 @@ function TemplateForm() {
         :
         <>
           <h2>Choose a guest: </h2>
-          <select onChange={(e) => handleGuestChange(e)}>
+          <select onChange={(e) => handleGuestChange(e.target.value)}>
             <option defaultValue="Select a guest" disabled selected>Select a guest</option>
-            {guests?.map(guest => {
+            {guests?.map(guestObject => {
+              const { firstName, id, lastName } = guestObject
               return (
-                <option value={guest.firstName} key={guest.id}>{guest.firstName} {guest.lastName}</option>
+                <option value={id} key={id}>{firstName} {lastName}</option>
               )
             })}
           </select>
