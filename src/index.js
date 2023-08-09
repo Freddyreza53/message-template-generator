@@ -32,7 +32,7 @@ const guestListReducer = (state = [], action) => {
   return state;
 }
 
-const selectedGuestReducer = (state = '{}', action) => {
+const selectedGuestReducer = (state = '', action) => {
   if (action.type === 'ADD_GUEST') {
       return action.payload
   } else if (action.type === 'CLEAR') {

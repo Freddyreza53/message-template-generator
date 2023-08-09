@@ -12,19 +12,11 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const company = useSelector(store => store.selectedCompanyReducer);
-  const guest = useSelector(store => store.selectedGuestReducer);
-  const messageTemplate = useSelector(store => store.selectedMessageReducer);
-
   useEffect(() => {
     dispatch({ type: 'ADD_COMPANIES', payload: companies });
     dispatch({ type: 'ADD_GUESTS', payload: guests });
     dispatch({ type: 'ADD_MESSAGES', payload: messageTemplates });
   }, []);
-
-console.log('company: ', company);
-console.log('guest: ', guest);
-console.log('message: ', messageTemplate);
 
   return (
     <div className="App">
