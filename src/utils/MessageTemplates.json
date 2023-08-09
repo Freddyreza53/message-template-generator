@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "message": "Good {GREETING} {FIRSTNAME}, and welcome to {HOTEL}! Room {NUMBER} is now ready you. Enjoy your stay, and let us know if you need anything."
+    },
+    {
+        "id": 2,
+        "message": "Good {GREETING} {FIRSTNAME}, thank you for booking at {HOTEL}! Your reservation is confirmed for Room {NUMBER} from {CHECKIN} to {CHECKOUT}. We can't wait to welcome you!"
+    }
+]
