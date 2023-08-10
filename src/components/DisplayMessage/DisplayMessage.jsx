@@ -8,10 +8,6 @@ function DisplayMessage() {
     const guest = useSelector(store => store.selectedGuestReducer);
     const messageTemplate = useSelector(store => store.selectedMessageReducer);
 
-    console.log('company: ', company);
-    console.log('guest: ', guest);
-    console.log('message: ', messageTemplate);
-
     const { DateTime } = require('luxon');
 
 const convertUnixTimestamp = (unixTimestamp) => {

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "message": "Good {GREETING} {FIRSTNAME}, and welcome to {HOTEL}! Room {NUMBER} is now ready you. Enjoy your stay, and let us know if you need anything."
+        "message": "Good {GREETING} {FIRSTNAME}, and welcome to {HOTEL}! Room {NUMBER} is now ready for you. Enjoy your stay, and let us know if you need anything."
     },
     {
         "id": 2,
