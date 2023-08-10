@@ -30,37 +30,40 @@ const checkTimeOfDayForGreeting = (timeNow) => {
     return (
         <>
             <h2>Message: </h2>
-            {messageTemplate == '' ?  
-                <div className='message-container'>
-                    {messageTemplate}
-                </div>
-                :
-                company == '' ?
-                    <div className='message-container'>
-                        {messageTemplate.message
-                            ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
-                        }
+            <div className='message-container'>
+                {messageTemplate == '' ?  
+                    <div>
+                        {messageTemplate}
                     </div>
                     :
-                    guest == '' ?
-                        <div className='message-container'>
+                    company == '' ?
+                        <div>
                             {messageTemplate.message
                                 ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
-                                ?.replace("{HOTEL}", company.company)
                             }
                         </div>
                         :
-                        <div className='message-container'>
-                        {messageTemplate.message
-                            ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
-                            ?.replace("{HOTEL}", company.company)
-                            ?.replace("{FIRSTNAME}", guest.firstName)
-                            ?.replace("{NUMBER}", guest.reservation?.roomNumber)
-                            ?.replace("{CHECKIN}", convertUnixTimestamp(guest.reservation?.startTimestamp))
-                            ?.replace("{CHECKOUT}", convertUnixTimestamp(guest.reservation?.endTimestamp))
-                        }
-                    </div>
-            }
+                        guest == '' ?
+                            <div>
+                                {messageTemplate.message
+                                    ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
+                                    ?.replace("{HOTEL}", company.company)
+                                }
+                            </div>
+                            :
+                            <div>
+                            {messageTemplate.message
+                                ?.replace("{GREETING}", checkTimeOfDayForGreeting(DateTime.now()))
+                                ?.replace("{HOTEL}", company.company)
+                                ?.replace("{FIRSTNAME}", guest.firstName)
+                                ?.replace("{NUMBER}", guest.reservation?.roomNumber)
+                                ?.replace("{CHECKIN}", convertUnixTimestamp(guest.reservation?.startTimestamp))
+                                ?.replace("{CHECKOUT}", convertUnixTimestamp(guest.reservation?.endTimestamp))
+                                ?.replace("{LASTNAME}", guest.lastName)
+                            }
+                        </div>
+                }
+            </div>
         </>
     );
 }
