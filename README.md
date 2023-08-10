@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+Message Generator
+===============================================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Prerequisites**
 
-## Available Scripts
+- NPM
 
-In the project directory, you can run:
+**Getting Started**
 
-### `npm start`
+1) Ensure all prerequisites are installed by checking their versions using your terminal 
+    &rarr; NPM: `npm -v`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2) Clone this repository `git clone https://github.com/Freddyreza53/message-template-generator.git` (to the folder you want to work out of locally)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+>**NOTE:** Double check you are in the correct folder before moving on to the next step. 
 
-### `npm test`
+3) Run `npm install` in your terminal
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4) Run `npm start` in your VSCode terminal or in your preferred IDE.
 
-### `npm run build`
+5) Finally have fun generating messages!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Overview**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I used descriptive placeholder variables throughout each template, and also instructed the user to use the same variables when creating a custom template, in order to be able to consistently and dynamically replace them with the selected guest and company information. With this in mind, I created 3 dropdowns using data from the JSON files for the user to be able to select from. The generator then takes all of the user inputs and replaces the placeholder variables with the information from the selected items. Following the example given, the user can create a custom message template to add to the list of templates to later use as well. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**What Language and Why?**
 
-### `npm run eject`
+I mainly used Javascript/React.js and Redux. I chose to use these because that is what I am most familiar with and given the time alloted, it was the language I could create a solution with the fastest. When working with React, prop drilling can get pretty out of hand and isn't best practice when it comes to development. I chose to use Redux to help store the necessary information and make it accessible to all the components I built or will be built in the future. In order to write cleaner code, I tried my best to follow best practices. To do this I made multiple components to be used to keep my main App component from being cluttered. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Verifying Correctness**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I made sure to do small commits and pushes to my main branch using git/github. By keeping my commits small, I was only adding small pieces of code and testing as I went to make sure none of the new logic I add will interfere with each other. I used the requirements outlined in the pdf to have a measure of correctness and tested my app using those criteria. I did my best to test and prevent edge cases. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**What didn't you get to, or what else might you do with more time?**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Given more time, I would create a database to store all of the info from the json files, a server and routes to interact with the database, add styling and refactor some functions to be more reusable. The functions in particular I would make more reusable is the one in the TemplateForm component, there are 3 handleChanges functions that all do the same thing. Styling would better enhance the users experience and make it better to look at than its current state. having a server, routes, and database would make the application more realistic and allow for a better source of truth. Having a database would also allow the user to store their custom templates long term and wouldn't lose their template on page refresh.

@@ -1,22 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+/* 
+    NewMessage component is used to allow the user to create a new custom message template to be used in the app
+*/
 function NewMessageModal() {
     const dispatch = useDispatch();
+
+    // retrieving list of messageTemplates held in reducer
     const messageTemplates = useSelector(store => store.messageTemplateReducer);
 
+    // creating state variable to hold user's custom message template
     const [newMessageTemplate, setNewMessageTemplate] = useState('')
 
+    // once the user clicks "Add New Template" button, this function will add the new message template to list of 
+    // templates and send them to be held in reducer
     const handleClick = () => {
-        console.log(messageTemplates);
         let messageTemplate = [
             ...messageTemplates,
-        {
-            id: messageTemplates.length + 1,
-            message: newMessageTemplate
-        }]
+            {
+                id: messageTemplates.length + 1,
+                message: newMessageTemplate
+            }
+        ]
+        // dispatch will send new list to reducer
         dispatch({ type: 'ADD_NEW_MESSAGE_TEMPLATE', payload: messageTemplate })
+        // clears new template textarea
         setNewMessageTemplate('')
     }
 
@@ -40,10 +49,10 @@ function NewMessageModal() {
                 onChange={(e)=>setNewMessageTemplate(e.target.value)}
                 rows="5" 
                 cols="33" 
-                placeholder='enter a new message template to add to the list above.'>
+                placeholder='Enter a new message template to add to the list above.'>
             </textarea>
             <br />
-            <button onClick={(e) => handleClick()}>Add New Message</button>
+            <button onClick={(e) => handleClick()}>Add New Template</button>
         </>
     );
 }

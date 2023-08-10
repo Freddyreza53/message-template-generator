@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+/* 
+  TemplateForm component is the form the user fills out in order to see final generated message 
+*/
 function TemplateForm() {
 
   const dispatch = useDispatch();
 
+  // fetches all the lists being held in reducers
   const companies = useSelector(store => store.companyListReducer);
   const guests = useSelector(store => store.guestListReducer);
   const messageTemplates = useSelector(store => store.messageTemplateReducer);
 
+  // fetches company and messageTemplate that the user selected 
   const company = useSelector(store => store.selectedCompanyReducer);
   const messageTemplate = useSelector(store => store.selectedMessageReducer);
 
+  // function takes in the id of the selected message template and finds the matching object to send to reducer
   const handleTemplateChange = (messageId) => {
-    console.log(messageId);
     messageTemplates.forEach(messageTemplate => {
       if (messageId == messageTemplate.id) {
         dispatch({ type: 'ADD_MESSAGE', payload: messageTemplate });
@@ -21,8 +26,8 @@ function TemplateForm() {
     });
   }
 
+  // function takes in the id of the selected company and finds the matching object to send to reducer
   const handleCompanyChange = (companyId) => {
-    console.log(companyId);
     companies.forEach(company => {
       if (companyId == company.id) {
         dispatch({ type: 'ADD_COMPANY', payload: company });
@@ -30,15 +35,14 @@ function TemplateForm() {
     });
   }
 
+  // function takes in the id of the selected guest and finds the matching object to send to reducer
   const handleGuestChange = (guestId) => {
-    console.log(guestId);
     guests.forEach(guest => {
       if (guestId == guest.id) {
         dispatch({ type: 'ADD_GUEST', payload: guest });
       }
     });
   }
-
 
   return (
     <>
@@ -53,7 +57,9 @@ function TemplateForm() {
         })}
       </select>
 
-      {messageTemplate == '' ? <></> : 
+      {messageTemplate == '' ? 
+        <></> 
+        : 
         <>
           <h2>Choose a Hotel: </h2>
           <select onChange={(e) => handleCompanyChange(e.target.value)}>
