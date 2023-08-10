@@ -1,5 +1,5 @@
 import DisplayMessage from '../DisplayMessage/DisplayMessage';
-import NewMessageModal from '../NewMessageModal/NewMessageModal';
+import NewMessage from '../NewMessage/NewMessage';
 import TemplateForm from '../TemplateForm/TemplateForm';
 import './App.css';
 import React, { useState, useEffect } from 'react';
@@ -13,19 +13,21 @@ function App() {
 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch({ type: 'ADD_COMPANIES', payload: companies });
     dispatch({ type: 'ADD_GUESTS', payload: guests });
     dispatch({ type: 'ADD_MESSAGES', payload: messageTemplates });
   }, []);
 
+  console.log('MessageTemplates: ', );
   return (
     <div className="App">
       <TemplateForm
       />
       <DisplayMessage
       />
-      <NewMessageModal/>
+      <NewMessage/>
     </div>
   );
 }

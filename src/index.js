@@ -8,9 +8,7 @@ import {createStore, combineReducers} from 'redux';
 const companyListReducer = (state = [], action) => {
   if (action.type === 'ADD_COMPANIES') {
       return action.payload
-  } else if (action.type === 'CLEAR') {
-      return state = [];
-  }
+  } 
   return state;
 }
 
@@ -26,8 +24,6 @@ const selectedCompanyReducer = (state = '', action) => {
 const guestListReducer = (state = [], action) => {
   if (action.type === 'ADD_GUESTS') {
       return action.payload
-  } else if (action.type === 'CLEAR') {
-      return state = [];
   }
   return state;
 }
@@ -44,8 +40,8 @@ const selectedGuestReducer = (state = '', action) => {
 const messageTemplateReducer = (state = [], action) => {
   if (action.type === 'ADD_MESSAGES') {
       return action.payload
-  } else if (action.type === 'CLEAR') {
-      return state = [];
+  } else if (action.type === 'ADD_NEW_MESSAGE_TEMPLATE') {
+      return action.payload
   }
   return state;
 }
